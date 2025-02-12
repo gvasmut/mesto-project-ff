@@ -70,8 +70,7 @@ function submitFormEditProfile(evt) {
   profileTitle.textContent = nameValue;
   profileDescription.textContent = jobValue;
 
-  const popup = evt.target.closest(".popup");
-  closePopup(popup);
+  closePopup(editPopup);
 }
 
 //добавление карточки
@@ -84,10 +83,8 @@ function handleFormAddCard(evt) {
   const newCard = createCard(cardData, deleteCard, openCardPopup);
   cardsContainer.prepend(newCard);
 
-  const popup = evt.target.closest(".popup");
-  closePopup(popup);
-  cardNameInput.value = "";
-  cardLinkInput.value = "";
+  closePopup(newCardPopup);
+  evt.target.reset();
 }
 
 formEditProfile.addEventListener("submit", submitFormEditProfile);
