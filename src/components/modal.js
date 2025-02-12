@@ -6,7 +6,7 @@ export function openPopup(popup) {
   document.addEventListener("click", overlayHandler);
 }
 
-export function closedPopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove("popup_is-opened");
   document.removeEventListener("keydown", keyHandler);
   document.removeEventListener("click", overlayHandler);
@@ -15,12 +15,12 @@ export function closedPopup(popup) {
 function keyHandler(evt) {
   if (evt.key === "Escape") {
     const openPopup = document.querySelector(".popup_is-opened");
-    closedPopup(openPopup);
+    closePopup(openPopup);
   }
 }
 
 function overlayHandler(evt) {
   if (evt.target.classList.contains("popup")) {
-    closedPopup(evt.target);
+    closePopup(evt.target);
   }
 }

@@ -1,9 +1,14 @@
 // template для карточек
-const cardTemplate = document.querySelector("#card-template").content;
+const cardTemplate = document.querySelector("#card-template").content.querySelector(".places__item");
+
+//клонирование шаблона
+function getCardTemplate() {
+  return cardTemplate.cloneNode(true);
+}
 
 //Создание и удаление карточки, Like,
 export function createCard(cardData, deleteCard, openCardPopup, likeCard) {
-  const cardElement = cardTemplate.querySelector(".places__item").cloneNode(true);
+  const cardElement = getCardTemplate();
   const cardImage = cardElement.querySelector(".card__image");
 
   cardImage.src = cardData.link;
