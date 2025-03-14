@@ -10,7 +10,7 @@ function getCardTemplate() {
 }
 
 //Создание и удаление карточки, Like,
-export function createCard(cardData, userId, popupDeleteCard, openCardPopup, likeCard) {
+export function createCard({ cardData, userId, popupDeleteCard, openCardPopup, likeCard }) {
   const cardElement = getCardTemplate();
   const cardImage = cardElement.querySelector(".card__image");
   const likeCounter = cardElement.querySelector(".like_counter");
@@ -28,9 +28,9 @@ export function createCard(cardData, userId, popupDeleteCard, openCardPopup, lik
     deleteButton.remove();
   } else {
     deleteButton.addEventListener("click", () => {
-      openPopup(popupDeleteCard);
-      const newButtonDeleteCard = popupDeleteCard.querySelector(".popup__button");
-      newButtonDeleteCard.addEventListener("click", (evt) => {
+      popupDeleteCard.querySelector(".popup__button").replaceWith(popupDeleteCard.querySelector(".popup__button").cloneNode(true));
+      const confirmDeleteButton = popupDeleteCard.querySelector(".popup__button");
+      confirmDeleteButton.addEventListener("click", (evt) => {
         evt.preventDefault();
         deleteCard(cardData._id)
           .then((result) => {
@@ -41,6 +41,7 @@ export function createCard(cardData, userId, popupDeleteCard, openCardPopup, lik
             console.error("Ошибка при удалении карточки:", err);
           });
       });
+      openPopup(popupDeleteCard);
     });
   }
 
